@@ -1,7 +1,14 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGO_URI; // stored in Vercel environment variables
-const client = new MongoClient(uri);
+const uri = process.env.MONGO_URI;
+
+let client;
+let clientPromise;
+
+if (!clientPromise) {
+  client = new MongoClient(uri);
+  clientPromise = client.connect();
+}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -15,8 +22,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    await client.connect();
-    const db = client.db("votingApp");
+    const connectedClient = await clientPromise;
+    const db = connectedClient.db("votingApp");
     const collection = db.collection("candidates");
 
     const result = await collection.findOneAndUpdate(
@@ -25,10 +32,18 @@ export default async function handler(req, res) {
       { upsert: true, returnDocument: "after" }
     );
 
-    res.json({ success: true, candidate: result.value.candidate, votes: result.value.votes });
+    // handle if result.value is null
+    if (!result.value) {
+      return res.json({ success: true, candidate, votes: 1 });
+    }
+
+    return res.json({
+      success: true,
+      candidate: result.value.candidate,
+      votes: result.value.votes,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
-  } finally {
-    await client.close();
+    console.error("Vote API error:", error);
+    return res.status(500).json({ success: false, error: error.message });
   }
 }
