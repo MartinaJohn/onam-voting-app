@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting Results</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+        padding: 20px;
+        text-align: center;
+      }
+      h2 {
+        margin-bottom: 20px;
+      }
+      table {
+        width: 90%;
+        max-width: 500px;
+        margin: auto;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th,
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background: #007bff;
+        color: white;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover {
+        background: #f1f1f1;
+      }
+      #refresh {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+      }
+      #refresh:hover {
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>📊 Voting Results</h2>
+
+    <table id="resultsTable">
+      <thead>
+        <tr>
+          <th>Candidate</th>
+          <th>Votes</th>
+        </tr>
+      </thead>
+      <tbody id="resultsBody">
+        <tr>
+          <td colspan="2">Loading...</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button id="refresh" onclick="loadResults()">🔄 Refresh</button>
+
+    <script>
+      async function loadResults() {
+        const body = document.getElementById("resultsBody");
+        body.innerHTML = "<tr><td colspan='2'>Loading...</td></tr>";
+
+        try {
+          const response = await fetch("/api/results");
+          const data = await response.json();
+
+          // sort candidates by votes descending
+          data.sort((a, b) => b.votes - a.votes);
+
+          body.innerHTML = "";
+          data.forEach((row) => {
+            body.innerHTML += `
+            <tr>
+              <td>Candidate ${row.candidate}</td>
+              <td>${row.votes}</td>
+            </tr>
+          `;
+          });
+        } catch (err) {
+          body.innerHTML = "<tr><td colspan='2'>⚠️ Error loading results</td></tr>";
+        }
+      }
+
+      // Load once on page load
+      loadResults();
+
+      // Auto-refresh every 10 seconds
+      setInterval(loadResults, 10000);
+    </script>
+  </body>
+</html>
