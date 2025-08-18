@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: #f9f9f9;
+      }
+      h2 {
+        margin: 15px;
+      }
+      .candidates {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        max-width: 400px;
+        margin: auto;
+      }
+      button {
+        padding: 15px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+      }
+      button.selected {
+        background: #28a745;
+      }
+      #submit {
+        margin-top: 20px;
+        padding: 15px 30px;
+        background: #ff5722;
+      }
+      #message {
+        margin-top: 15px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Vote for Your Candidate</h2>
+    <div class="candidates">
+      <button onclick="selectCandidate(1)">1</button>
+      <button onclick="selectCandidate(2)">2</button>
+      <button onclick="selectCandidate(3)">3</button>
+      <button onclick="selectCandidate(4)">4</button>
+      <button onclick="selectCandidate(5)">5</button>
+      <button onclick="selectCandidate(6)">6</button>
+      <button onclick="selectCandidate(7)">7</button>
+      <button onclick="selectCandidate(8)">8</button>
+      <button onclick="selectCandidate(9)">9</button>
+      <button onclick="selectCandidate(10)">10</button>
+    </div>
+    <button id="submit" onclick="submitVote()">Submit</button>
+    <p id="message"></p>
+
+    <script>
+      let selectedCandidate = null;
+      const buttons = document.querySelectorAll(".candidates button");
+      const message = document.getElementById("message");
+
+      function selectCandidate(num) {
+        selectedCandidate = num;
+        buttons.forEach((btn) => btn.classList.remove("selected"));
+        buttons[num - 1].classList.add("selected");
+      }
+
+      async function submitVote() {
+        if (!selectedCandidate) {
+          message.textContent = "Please select a candidate!";
+          message.style.color = "red";
+          return;
+        }
+
+        try {
+          const response = await fetch("/api/vote", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ candidate: selectedCandidate }),
+          });
+          const result = await response.json();
+
+          if (result.success) {
+            message.textContent = `✅ Vote recorded for candidate ${result.candidate}`;
+            message.style.color = "green";
+            selectedCandidate = null;
+            buttons.forEach((btn) => btn.classList.remove("selected"));
+          } else {
+            message.textContent = "❌ Error submitting vote.";
+            message.style.color = "red";
+          }
+        } catch (err) {
+          message.textContent = "⚠️ Network error. Try again.";
+          message.style.color = "red";
+        }
+      }
+    </script>
+  </body>
+</html>
