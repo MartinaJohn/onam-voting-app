@@ -69,6 +69,8 @@
         selectedCandidate = num;
         buttons.forEach((btn) => btn.classList.remove("selected"));
         buttons[num - 1].classList.add("selected");
+        // NEW: clear any old success/error message
+        message.textContent = "";
       }
 
       async function submitVote() {
