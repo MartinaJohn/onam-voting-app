@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700;800;900&family=Raleway:wght@700;800&display=swap");
 
 .title-wrapper {
   text-align: center;
@@ -9,9 +9,9 @@
   margin: 0;
   padding: 0;
   font-family: "Playfair Display", serif;
-  font-weight: 700;
-  font-size: 30px;
-  color: #14532d; /* Deep green */
+  font-weight: 900; /* Increased from 700 */
+  font-size: 32px;
+  color: #14532d;
   text-transform: uppercase;
   line-height: 1.1;
   position: relative;
@@ -19,8 +19,9 @@
 
 .onam-script {
   font-family: "Great Vibes", cursive;
-  font-size: 48px;
-  color: #5b8c5a;
+  font-size: 50px;
+  font-weight: bold; /* Some cursive fonts ignore this, but added for support */
+  color: #4a7b48;
   display: block;
   margin-bottom: 5px;
   transform: rotate(-2deg);
@@ -31,11 +32,13 @@
 }
 
 .pookalam-text {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
   letter-spacing: 1px;
-  font-size: 25px;
+  font-size: 26px;
   line-height: 1.4;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   display: block;
   animation: fadeInUp 1s ease-out forwards;
   animation-delay: 0.3s;
@@ -44,13 +47,12 @@
 
 .subtitle {
   font-family: "Raleway", sans-serif;
-  font-weight: 900;
-  font-size: 20px;
+  font-weight: 800;
+  font-size: 21px;
   color: #b38600;
-  letter-spacing: 1px;
-  /* text-transform: uppercase; */
+  letter-spacing: 1.2px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  margin-top: 11px;
+  margin-top: 12px;
   animation: fadeInUp 1s ease-out forwards;
   animation-delay: 0.5s;
   opacity: 0;
@@ -66,11 +68,17 @@ h2 {
 }
 .candidates {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  max-width: 400px;
-  margin: auto;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  /* Add this to center grid items when they don’t fill the full row */
+  justify-content: center;
 }
+
 .title-divider {
   border: none;
   height: 2px;
@@ -87,7 +95,7 @@ button {
   font-size: 18px;
   border: 2px solid green;
   border-radius: 8px;
-  background: rgba(144, 238, 144, 0.3); /* light green transparent */
+  background: rgba(167, 235, 167, 0.3); /* light green transparent */
   color: green;
   cursor: pointer;
   transition: 0.3s;
