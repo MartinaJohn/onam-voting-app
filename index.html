@@ -4,61 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Voting App</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background: #f9f9f9;
-      }
-      h2 {
-        margin: 15px;
-      }
-      .candidates {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 10px;
-        max-width: 400px;
-        margin: auto;
-      }
-      button {
-        padding: 15px;
-        font-size: 18px;
-        border: 2px solid green;
-        border-radius: 8px;
-        background: rgba(144, 238, 144, 0.3); /* light green transparent */
-        color: green;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      button:hover {
-        background: rgba(144, 238, 144, 0.6);
-      }
-      button.selected {
-        background: green;
-        color: white;
-      }
-      #submit {
-        margin-top: 20px;
-        padding: 15px 30px;
-        background: rgba(100, 149, 237, 0.3); /* cornflowerblue transparent */
-        color: #0033cc;
-        border: 2px solid #0033cc;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      #submit:hover {
-        background: rgba(100, 149, 237, 0.6);
-      }
-      #message {
-        margin-top: 15px;
-        font-size: 16px;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&family=Raleway:wght@600&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <h2>Vote for Your Candidate</h2>
+    <div class="title-wrapper">
+      <h1 class="onam-title">
+        <span class="onam-script">Onam</span>
+        <span class="pookalam-text">POOKKALAM COMPETITION</span>
+      </h1>
+      <div class="subtitle">People's Choice Award Voting</div>
+      <hr class="title-divider" />
+    </div>
     <div class="candidates">
       <button onclick="selectCandidate(1)">1</button>
       <button onclick="selectCandidate(2)">2</button>
