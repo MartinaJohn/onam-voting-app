@@ -47,7 +47,7 @@
       async function submitVote() {
         if (!selectedCandidate) {
           message.textContent = "Please select a candidate!";
-          message.style.color = "red";
+          message.className = "error";
           return;
         }
 
