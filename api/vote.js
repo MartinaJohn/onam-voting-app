@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
   const { candidate } = req.body;
 
-  if (!candidate || candidate < 1 || candidate > 10) {
+  if (!candidate || candidate < 1 || candidate > 100) {
     return res.status(400).json({ error: "Invalid candidate" });
   }
 
