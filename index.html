@@ -41,6 +41,7 @@
         buttons[num - 1].classList.add("selected");
         // NEW: clear any old success/error message
         message.textContent = "";
+        message.className = "";
       }
 
       async function submitVote() {
@@ -60,16 +61,16 @@
 
           if (result.success) {
             message.textContent = `✅ Vote successfully recorded!`;
-            message.style.color = "green";
+            message.className = "success"; // Add class for styling
             selectedCandidate = null;
-            buttons.forEach((btn) => btn.classList.remove("selected"));
+            document.querySelectorAll(".candidates button").forEach((btn) => btn.classList.remove("selected"));
           } else {
             message.textContent = "❌ Error submitting vote.";
-            message.style.color = "red";
+            message.className = "error";
           }
         } catch (err) {
           message.textContent = "⚠️ Network error. Try again.";
-          message.style.color = "red";
+          message.className = "warning";
         }
       }
     </script>
