@@ -1,8 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700;800;900&family=Raleway:wght@700;800&display=swap");
 
+.church-name {
+  text-align: center;
+  font-family: "Cinzel", serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  color: #1d321c;
+  letter-spacing: 1px;
+}
+
 .title-wrapper {
   text-align: center;
-  margin: 25px auto;
+  margin: 23px auto;
 }
 
 .onam-title {
