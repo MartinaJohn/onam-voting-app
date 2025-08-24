@@ -160,6 +160,16 @@ button.selected {
 #message.warning {
   color: #f9a825; /* amber */
 }
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #f4f4f4;
+  color: #515050;
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+  margin-top: 40px;
+}
 
 @keyframes fadeInUp {
   from {
